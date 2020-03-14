@@ -9,8 +9,7 @@ class Home extends Controller {
 
     public function aparts() {
         $modelObject = $this->model('aparts');
-        print_r($modelObject->_aprts);
-
+        print_r($modelObject->list());
     }
 
 }

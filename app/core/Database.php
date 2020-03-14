@@ -3,10 +3,14 @@
 
 class Database {
 
-    const SERVER = 'incoloriadesign19853.ipagemysql.com';
-    const DB = 'incoloria';
-    const USER = 'pub';
-    const PASS = 'Locatia_Devteam27';
+//    const SERVER = 'incoloriadesign19853.ipagemysql.com';
+//    const DB = 'incoloria';
+//    const USER = 'pub';
+//    const PASS = 'Locatia_Devteam27';
+    const SERVER = 'localhost';
+    const DB = 'locatia_db';
+    const USER = 'root';
+    const PASS = '';
 
     private $pdo = null;
 

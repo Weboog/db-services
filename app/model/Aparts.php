@@ -11,7 +11,8 @@ class Aparts extends Database {
     ];
 
     public function list() {
-        return parent::PDO();
+//        return parent::PDO();
+        return $this->_aparts;
     }
 
 }
