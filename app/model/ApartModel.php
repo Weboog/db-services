@@ -1,7 +1,7 @@
 <?php
 
 
-class Aparts extends Database {
+class ApartModel extends Database {
 
     public $_aparts = [
         ['id' => '857124693', 'price' => 450],
@@ -11,8 +11,10 @@ class Aparts extends Database {
     ];
 
     public function list() {
-//        return parent::PDO();
-        return $this->_aparts;
+        return $this->find();
+    }
+    public function get(string $id) {
+        return $this->findOne(['id' => $id]);
     }
 
 }
