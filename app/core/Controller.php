@@ -4,8 +4,13 @@
 class Controller
 {
 
-    public function model($controller = '') {
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_DELETE = 'DELETE';
+    const METHOD_PUT = 'PUT';
+    const METHOD_PATCH = 'PATCH';
 
+    public function model($controller = '') {
 
         if ($controller !== '') {
             $name = ucfirst($controller).'Model';
@@ -16,7 +21,6 @@ class Controller
             require_once '../app/model/'.$name.'.php';
             return new $name;
         }
-
     }
 
 }

@@ -3,18 +3,17 @@
 
 class ApartModel extends Database {
 
-    public $_aparts = [
-        ['id' => '857124693', 'price' => 450],
-        ['id' => '740256710', 'price' => 300],
-        ['id' => '870312548', 'price' => 250],
-        ['id' => '236884107', 'price' => 350]
-    ];
+//    private $table = __CLASS__;
 
-    public function list() {
-        return $this->find();
+    public function list(array $criteria = []) {
+        return $this->find($criteria);
     }
     public function get(string $id) {
         return $this->findOne(['id' => $id]);
+    }
+
+    public function createApart(array $data) {
+        return $this->addApart($data);
     }
 
 }
