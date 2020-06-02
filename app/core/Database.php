@@ -69,6 +69,40 @@ class Database {
 //        print_r($stm->errorInfo());
     }
 
+    public function getApart(string $id) {
+        $req = "select apart.id,
+               apart.human_id,
+               apart.price,
+               apart.surface,
+               apart.pieces,
+               apart.rooms,
+               apart.floors,
+               apart.location,
+               apart.address,
+               apart.description,
+               apart.external,
+               apart.internal,
+               apart.conditions,
+               action.name as action,
+               period.name as period,
+               property.name as property,
+               city.name as city
+               from apart
+               inner join action on apart.action = action.id
+               inner join period on apart.period = period.id
+               inner join property on apart.property = property.id
+               inner join city on apart.city = city.id
+               where apart.id = :id";
+        $stm = self::getInstance()->prepare($req);
+        $stm->bindParam(':id', $id, PDO::PARAM_STR);
+        if ($stm->execute()) {
+            print_r($stm->fetch(PDO::FETCH_ASSOC));
+        } else {
+            print_r($stm->errorInfo());
+        }
+
+    }
+
     public function addApart(array $data): array {
         try {
             $id = bin2hex(random_bytes(17));
@@ -95,6 +129,7 @@ class Database {
             return ['affected' => $stm->rowCount(), 'id' => $id ];
         } else {
             print_r($stm->errorInfo());
+            return ['affected' => 0, 'message' => 'cannot save apart data!'];
         }
 //        echo $req;
     }

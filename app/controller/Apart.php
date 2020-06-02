@@ -50,10 +50,16 @@ class Apart extends Controller {
     }
 
     private function create() {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-        $stm = $this->model()->createApart($data);
-        echo json_encode($stm);
+        if (!empty($_FILES)) {
+            $uploader = new FileUploader('gallery', $_FILES);
+            $uploader->save();
+        } else {
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            $stm = $this->model()->createApart($data);
+            echo json_encode($stm);
+        }
+
     }
 
 }
