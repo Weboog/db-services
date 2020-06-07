@@ -16,4 +16,8 @@ class ApartModel extends Database {
         return $this->addApart($data);
     }
 
+    public function incrementViewCount(string $id){
+        $this->increment(['id' => $id]);
+    }
+
 }

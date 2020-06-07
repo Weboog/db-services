@@ -72,6 +72,13 @@ class Database {
 //        print_r($stm->errorInfo());
     }
 
+    public function increment($criteria = []): void {
+        $this->where($criteria);
+        $req = 'UPDATE ' . $this->table() . ' SET view_count = view_count+1' . self::$where;
+        $stm = self::getInstance()->prepare($req);
+        $stm->execute(self::$execArray);
+    }
+
     public function getApart(string $id): array {
         $req = "select apart.id,
                apart.human_id,

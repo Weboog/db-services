@@ -37,6 +37,10 @@ class Apart extends Controller {
         }
     }
 
+    public function increment($id){
+        $this->model()->incrementViewCount($id);
+    }
+
     //Get all aparts
     private function getAll(array $action = []): void {
         Response::send($this->model()->list($action));
@@ -54,6 +58,7 @@ class Apart extends Controller {
         Response::send($data);
 //        echo json_encode(['what' => 'Show apart id : '.$id]);
     }
+
 
     private function create() {
         if (!empty($_FILES)) {
