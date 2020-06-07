@@ -7,11 +7,14 @@ class Database {
 //    const DB = 'locatia_2c202877ba1e';
 //    const USER = 'weboog_2c202877';
 //    const PASS = 'Locatia-Dev27!';
+//    const SERVER = 'localhost';
+//    const DB = 'incolori_locatia_ab48ad22b9db7976e993e38d4db65a8f';
+//    const USER = 'incolori_user_e6c1816bd91d3a565a2e8bc2ce83dba4';
+//    const PASS = 'Locatia-Dev!27';
     const SERVER = 'localhost';
     const DB = 'locatid_db';
     const USER = 'root';
     const PASS = '';
-
     private static $pdo = null;
     private static $where;
     private static $execArray = [];
@@ -69,7 +72,7 @@ class Database {
 //        print_r($stm->errorInfo());
     }
 
-    public function getApart(string $id) {
+    public function getApart(string $id): array {
         $req = "select apart.id,
                apart.human_id,
                apart.price,
@@ -96,9 +99,10 @@ class Database {
         $stm = self::getInstance()->prepare($req);
         $stm->bindParam(':id', $id, PDO::PARAM_STR);
         if ($stm->execute()) {
-            print_r($stm->fetch(PDO::FETCH_ASSOC));
+            return $stm->fetch(PDO::FETCH_ASSOC);
         } else {
             print_r($stm->errorInfo());
+            return [];
         }
 
     }
@@ -124,12 +128,13 @@ class Database {
         $req .= ') VALUES (';
         $req .= $values;
         $req .= ')';
+//        echo $req;
+//        die();
         $stm = self::getInstance()->prepare($req);
         if ($stm->execute()) {
             return ['affected' => $stm->rowCount(), 'id' => $id ];
         } else {
             print_r($stm->errorInfo());
-            return ['affected' => 0, 'message' => 'cannot save apart data!'];
         }
 //        echo $req;
     }

@@ -3,7 +3,7 @@
 
 class Action extends Controller {
 
-    public function index(): void {
+    public function index() {
         Response::send($this->model()->list());
     }
 

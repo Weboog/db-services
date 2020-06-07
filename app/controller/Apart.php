@@ -45,14 +45,21 @@ class Apart extends Controller {
 
     //Get apart by id
     private function getDetails($id) {
-        Response::send($this->model()->get($id));
+        $scan = scandir('../../locatia/assets/media/gallery/' . $id);
+        unset($scan[0]);
+        unset($scan[1]);
+        $scan = array_values($scan);
+        $data = $this->model()->get($id);
+        $data['images'] = $scan;
+        Response::send($data);
 //        echo json_encode(['what' => 'Show apart id : '.$id]);
     }
 
     private function create() {
         if (!empty($_FILES)) {
             $uploader = new FileUploader('gallery', $_FILES);
-            $uploader->save();
+            $status = $uploader->save();
+            Response::send($status);
         } else {
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);

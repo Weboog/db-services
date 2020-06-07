@@ -9,7 +9,7 @@ class ApartModel extends Database {
         return $this->find($criteria);
     }
     public function get(string $id) {
-         $this->getApart($id);
+        return $this->getApart($id); 
     }
 
     public function createApart(array $data) {

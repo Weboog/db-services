@@ -21,6 +21,7 @@ class Controller
             require_once '../app/model/'.$name.'.php';
             return new $name;
         }
+
     }
 
 }
